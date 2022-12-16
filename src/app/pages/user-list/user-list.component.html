@@ -1,0 +1,100 @@
+<!--
+============================================
+; Title: bcrs
+; Author: Professor Krasso
+; Date: 7 September 2022
+; Modified By: Seth Kerrey, Laura Kendl
+; Description: The Bob's Computer Repair Shop (BCRS) application calculates
+; service repair fees, generates invoices, and tracks purchases by service.
+; Resources:
+; Stackblitz: https://stackblitz.com/edit/angular-table-reponsive-re1dnq?file=src%2Fapp%2Fapp.component.ts (Angular Table Responsive)
+===========================================
+-->
+
+<div fxLayout="column">
+  <mat-card class="mat-elevation-z0" style="width: 100%;">
+    <mat-card-title>Users Configuration</mat-card-title>
+    <br />
+    <mat-card-subtitle>
+      <button mat-raised-button routerLink="/employee/users/create/new" color="primary">Create User</button>
+    </mat-card-subtitle>
+
+    <mat-card-content *ngIf="users" class="mat-card-content">
+      <mat-table [dataSource]="users" matSort>
+
+        <ng-container matColumnDef="userName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="userName">{{ element.userName }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="First Name">{{ element.firstName }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Last Name">{{ element.lastName }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="role">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>User Role</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="User Role">{{ element.role.text }}</mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="phoneNumber">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Phone Number</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Phone Number">{{ element.phoneNumber }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Address">{{ element.address }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Email">{{ element.email }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="functions">
+          <mat-header-cell *matHeaderCellDef>Functions</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Functions">
+            <button mat-icon-button routerLink="/employee/users/{{element._id}}">
+              <mat-icon color="warn">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="delete(element._id, element.userName)">
+              <mat-icon color="primary">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- <p-table [value]="users" responsiveLayout="scroll">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>UserName</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td>{{user.userName}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.phoneNumber}}</td>
+      <td>{{user.email}}</td>
+    </tr>
+  </ng-template>
+</p-table> -->
